@@ -1,4 +1,4 @@
-## 1. Introduction
+# 1. Introduction
 With the rise of e-commerce, people from all walks of live are embracing the process of buying and selling products online. Having a great variety of products is one of the key advantages of e-commerce sites as compared to brick and mortar stores. 
 
 However, as the number of products listed on these sites increases, it inevitably leads to problems. One such problem is the categorization of the listed products. Due the sheer number of products, it is no longer feasible for products to be manually categorized.
@@ -8,14 +8,21 @@ Overall, this will lead to a decrease in user experience, which in turn will adv
 
 In the "Product Detection" challenge, participants are tasked to predict the correct categories of the products based on the images uploaded by users. 
 We are given 105390 labeled and 12186 un-labeled images. 
-Each labeled image is also given the ground truth label, out of 42 categories. 
+Each labeled image is also given a integer value to denote its ground truth category, out of 42 categories.
 However, much like in the real world sceanrio, these ground truth lables contain errors.
 Furthermore, each class may not have the same number of labeled images.
 Therefore, the real challenge is to build a classification model that is robust to these noises.
 
-## 2. Preliminary data analysis
+# 2. Preliminary data analysis
 
+Except for these 6 categories: 11, 17, 18, 29, 33, 37, the distribution across the categories is quite uniform (Figure 1). Despite the presence of mis-labeled data, we are still able to get a rough sensing of what each category is about. For example, Figure 2 shows the images taken from category 5.
 
+Figure 1:
+![Image](images/distribution_of_product_categories_in_labeled_data.png)
+Figure2:
+![Image](images/sample_images.png)
+
+Is there any relationship between category and original image length?
 
 
 ## Results
