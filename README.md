@@ -77,6 +77,7 @@ Legend
 9. Use 100% labeled data to train model.
 10. Try other model architecture e.g. inception_resnet_v2, inception_v3, nasnet, efficientnet but I'm reluctant to try this because the current models are already overfitting the training data (>0.99 acc).
 11. Focal loss. Focus on loss for categories that are more difficult to classify.
+12. SGD
 
 ## Experiments to do:
 1. Compare different data augmentation methods
