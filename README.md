@@ -51,10 +51,14 @@ Legend
 8. Stacking.
 9. Use 100% labeled data to train model.
 10. Try other model architecture e.g. inception_resnet_v2, inception_v3, nasnet, efficientnet but I'm reluctant to try this because the current models are already overfitting the training data (>0.99 acc).
+11. Focal loss. Focus on loss for categories that are more difficult to classify.
+
+## Experiments to do:
+1. Compare different data augmentation methods
+2. 
 
 ## Things to note:
 1. Validation set seems to resemble closely to test set. Calidation accuracy is usually within +0.02 of public score.
-
 
 ## Reference Kaggle notebooks:
 1. [Getting started with 100+ flowers on TPU](https://www.kaggle.com/mgornergoogle/getting-started-with-100-flowers-on-tpu): Basic template for using TPU on classification problem with data augmentation: random flip left right.
