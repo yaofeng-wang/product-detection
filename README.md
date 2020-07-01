@@ -55,7 +55,7 @@ Legend
 
 ## Experiments to do:
 1. Compare different data augmentation methods
-2. 
+2. Compare between using 1024 * 1024 images with 512 * 512 images.
 
 ## Things to note:
 1. Validation set seems to resemble closely to test set. Calidation accuracy is usually within +0.02 of public score.
