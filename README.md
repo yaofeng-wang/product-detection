@@ -7,8 +7,8 @@ Without cost-effective and accurate categorization of the products, it may becom
 Overall, this will lead to a decrease in user experience, which in turn will adversely impact the conversion rate of the e-commerce site. Therefore, it is vital for e-commerce sites, such as Shopee, to have an effective product categorizaion algorithm.
 
 In the "Product Detection" challenge, participants are tasked to predict the correct categories of the products based on the images uploaded by users. 
-We are given 105390 labeled images. 
-Each labeled image is given the ground truth label, out of 42 categories. 
+We are given 105390 labeled and 12186 un-labeled images. 
+Each labeled image is also given the ground truth label, out of 42 categories. 
 However, much like in the real world sceanrio, these ground truth lables contain errors.
 Furthermore, each class may not have the same number of labeled images.
 Therefore, the real challenge is to build a classification model that is robust to these noises.
