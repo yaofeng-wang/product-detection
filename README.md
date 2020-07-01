@@ -2,18 +2,18 @@
 
 ## Results
 
-| Index | Model Architecture | Image size | TL/FT  | Data Augmentation | Callbacks, Label smoothing, Optimizer, Extra feature           | Public Score |
-| ----- | ------------------ | ---------- | -------| ----------------- | -------------------------------------------------------------- | ------------ |
-| 01    | MNetV2 + GAP + sm  | 160x160x3  |  TL    |   -               | MC,label smoothing=0, adam, 90/10 train-val split              | 0.62417      | 
-| 02    | MNetV2 + GAP + sm  | 160x160x3  |  TL    |   -               | RLRoP+ES+MC,label smoothing=0, adam, 90/10 train-val split     | 0.66719      | 
-| 03    | XNet + GAP + sm    | 160x160x3  |  FT    |   -               | LRS+ES+MC, label smoothing=0, adam, 90/10 train-val split      |    ?         |
-| 04    | XNet + GAP + sm    | 512x512x3  |  FT    |   -               | LRS+ES+MC, label smoothing=0, adam, 90/10 train-val split      | 0.79044      |
-| 05    | XNet + GAP + sm    | 512x512x3  |  FT    |   DA method 1     | LRS+ES+MC, label smoothing=0, adam, 90/10 train-val split      | 0.80258      |
-| 06    | XNet + GAP + sm    | 512x512x3  |  FT    |   DA method 1     | LRS+ES+MC, label smoothing=0, adam, 3Fold CV, all labeled data | 0.82026      |
-| 07    | DNet201 + GAP + sm | 512x512x3  |  FT    |   DA method 1     | LRS+ES+MC, label smoothing=0, adam, 3Fold CV, all labeled data | 0.82581      |
-| 08    | DNet201 + GAP + sm | 512x512x3  |  FT    | Flips+GridMask    | LRoP+ES+MC, label smoothing=0.1, adam,90/10 train-val split    | 0.82607      |
-| 09    | DNet201 + GAP + sm | 512x512x3  |  FT    | Flips+GridMask    | LRS+ES+MC, label smoothing=0.1, adam, 90/10 train-val split    | 0.81604      |
-| 10    | DNet201 + GAP + sm | 512x512x3  |  FT    | Flips+GridMask    | LRS+ES+MC, label smoothing=0.2, adam, 90/10 train-val split    | 0.80390      |
+| Index | Model Architecture | Image size | TL/FT  | Data Augmentation | Callbacks, Label smoothing, Optimizer, Extra feature           |  PS     | Notebook |
+| ----- | ------------------ | ---------- | -------| ----------------- | -------------------------------------------------------------- | ------- | -------- |
+| 01    | MNetV2 + GAP + sm  | 160x160x3  |  TL    |   -               | MC,label smoothing=0, adam, 90/10 train-val split              | 0.62417 | -        |
+| 02    | MNetV2 + GAP + sm  | 160x160x3  |  TL    |   -               | RLRoP+ES+MC,label smoothing=0, adam, 90/10 train-val split     | 0.66719 | -        |
+| 03    | XNet + GAP + sm    | 160x160x3  |  FT    |   -               | LRS+ES+MC, label smoothing=0, adam, 90/10 train-val split      |    ?    | -        |
+| 04    | XNet + GAP + sm    | 512x512x3  |  FT    |   -               | LRS+ES+MC, label smoothing=0, adam, 90/10 train-val split      | 0.79044 | -        |
+| 05    | XNet + GAP + sm    | 512x512x3  |  FT    |   DA method 1     | LRS+ES+MC, label smoothing=0, adam, 90/10 train-val split      | 0.80258 | -        |
+| 06    | XNet + GAP + sm    | 512x512x3  |  FT    |   DA method 1     | LRS+ES+MC, label smoothing=0, adam, 3Fold CV, all labeled data | 0.82026 | -        |
+| 07    | DNet201 + GAP + sm | 512x512x3  |  FT    |   DA method 1     | LRS+ES+MC, label smoothing=0, adam, 3Fold CV, all labeled data | 0.82581 | -        |
+| 08    | DNet201 + GAP + sm | 512x512x3  |  FT    | Flips+GridMask    | LRoP+ES+MC, label smoothing=0.1, adam,90/10 train-val split    | 0.82607 | -        |
+| 09    | DNet201 + GAP + sm | 512x512x3  |  FT    | Flips+GridMask    | LRS+ES+MC, label smoothing=0.1, adam, 90/10 train-val split    | 0.81604 | -        |
+| 10    | DNet201 + GAP + sm | 512x512x3  |  FT    | Flips+GridMask    | LRS+ES+MC, label smoothing=0.2, adam, 90/10 train-val split    | 0.80390 | -        |
 
 Legend
 - TL: Transfer learning
@@ -28,6 +28,7 @@ Legend
 - ES: Earlystopping callback
 - MC: ModelCheckpoint callback
 - LRS: Learning rate scheduler callback mentioned [here](https://www.kaggle.com/mgornergoogle/getting-started-with-100-flowers-on-tpu)
+- PS: Public Score
 
 ## Things that helped:
 1. TPU >> GPU >> CPU.
@@ -49,7 +50,7 @@ Legend
 7. Hill climbing algorithm.
 8. Stacking.
 9. Use 100% labeled data to train model.
-10. Try other model architecture.
+10. Try other model architecture e.g. inception_resnet_v2, inception_v3, nasnet, efficientnet but I'm reluctant to try this because the current models are already overfitting the training data (>0.99 acc).
 
 ## Things to note:
 1. Validation set seems to resemble closely to test set. Calidation accuracy is usually within +0.02 of public score.
