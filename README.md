@@ -1,4 +1,21 @@
-# product-detection
+## 1. Introduction
+With the rise of e-commerce, people from all walks of live are embracing the process of buying and selling products online. Having a great variety of products is one of the key advantages of e-commerce sites as compared to brick and mortar stores. 
+
+However, as the number of products listed on these sites increases, it inevitably leads to problems. One such problem is the categorization of the listed products. Due the sheer number of products, it is no longer feasible for products to be manually categorized.
+Without cost-effective and accurate categorization of the products, it may become cumbersome for potential buyers to find the product that they want. Also, an indirect effect of this problem may be a reduction in the relevance of recommended products because the recommendation systems are given inaccurate product category.
+
+Overall, this will lead to a decrease in user experience, which in turn will adversely impact the conversion rate of the e-commerce site. Therefore, it is vital for e-commerce sites, such as Shopee, to have an effective product categorizaion algorithm.
+
+In the "Product Detection" challenge, participants are tasked to predict the correct categories of the products based on the images uploaded by users. 
+We are given 105390 labeled images. 
+Each labeled image is given the ground truth label, out of 42 categories. 
+However, much like in the real world sceanrio, these ground truth lables contain errors.
+Furthermore, each class may not have the same number of labeled images.
+Therefore, the real challenge is to build a classification model that is robust to these noises.
+
+
+
+
 
 ## Results
 
