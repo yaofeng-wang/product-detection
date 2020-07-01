@@ -13,6 +13,7 @@ However, much like in the real world sceanrio, these ground truth lables contain
 Furthermore, each class may not have the same number of labeled images.
 Therefore, the real challenge is to build a classification model that is robust to these noises.
 
+## 2. Preliminary data analysis
 
 
 
