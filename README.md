@@ -1,3 +1,6 @@
+# 0. Abstract
+In the "Product Detection" challenge, our team managed to obtain a private leaderboard score of X and clined the Xth place in the student catgory, among X teams from countries such as Singpapore, Indonesia, Malaysia, Taiwan,etc. Our model consists of a 3 layer stacked model. Level 0 consists of various classifers such as DenseNEt201, XceptionModel, KNN, logistic regresssion. Level 1 consists of 3 classifiters, XGBoost, AdaBoost, and a Dense neural network. In the last layer, we took a weighted average of the models in the previous layer, optmised using hill climbing algorithm.
+
 # 1. Introduction
 With the rise of e-commerce, people from all walks of live are embracing the process of buying and selling products online. Having a great variety of products is one of the key advantages of e-commerce sites as compared to brick and mortar stores. 
 
@@ -22,8 +25,43 @@ Figure 1:
 Figure2:
 ![Image](images/sample_images.png)
 
-Is there any relationship between category and original image length?
 
+# 3. Data Processing
+Since the number of data points is quite substantial, we decided to split the labelled data randomly into a 90/10 train-validation split. 
+This split allocates 94860 data points into the training set and 10539 data points into the validation set. 
+The training set was used to train the base models. 
+
+We used the predicted probabilities of the validation set as inputs for the meta-models, which we tuned using 4-Fold stratified cross validation.
+
+
+## Base models:
+Layer 0 consists of various classifiers to diversify our ensemble. We trained the 2 deep neural networks using TPUs provided by Kaggle, which provided a significant reduction in training time, allowing us to employ more extensive data augmentations to alleviate overfitting.
+
+1. DenseNet201 + GlobalAveragePooling2D + Softmax. Fine tuning. Data Augmentations: Random Flips + Rotation + Sheer + Shift. Input: 512*512*3 sized images only. Optimizer: Adam
+2. XceptionNet
+3. KNN on TF-IDF, K = 20
+4. KNN on TF-IDF, K = 40
+5. KNN on word embedding, K = 20
+6. KNN on word embedding, K = 40
+7. 
+
+Meta-models:
+(trained using)
+8. XGBoost with Bayesian optimisation
+9. NN
+10. Adaboost
+
+Weighted average of meta models using hill climbing algorithm
+
+## Model validation results:
+| Model Index | Validation accuracy    |
+| ----------- | ---------------------- |
+| 01          |     0.8159             |
+| 02          |       -                |
+| 03          |       -                |
+| 04          |       -                |
+| 05          |       -                |
+| 06          |       -                |
 
 ## Results
 
@@ -97,6 +135,8 @@ Legend
 3. [A Conceptual Explanation of Bayesian Hyperparameter Optimization for Machine Learning](https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f): Provides theoretical explanation for how Bayesian optimization works.
 4. [Introduction: Bayesian Optimization using Hyperopt](https://github.com/WillKoehrsen/hyperparameter-optimization/blob/master/Introduction%20to%20Bayesian%20Optimization%20with%20Hyperopt.ipynb): A simple demonstration of Bayesian optimzation.
 5. [Tf-idf weighting](https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html): Exaplanation for Term frequency - inverse document frequency.
+6. [Stacking Ensemble Machine Learning With Python](https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/)
+7. 
 
 ## Reference papers:
 1. [Xception: Deep Learning with Depthwise Separable Convolutions](https://arxiv.org/abs/1610.02357).
