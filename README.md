@@ -16,15 +16,14 @@ However, much like in the real world sceanrio, these ground truth lables contain
 Furthermore, each class may not have the same number of labeled images.
 Therefore, the real challenge is to build a classification model that is robust to these noises.
 
-# 2. Preliminary data analysis
+# 2. Data exploration
 
 Except for these 6 categories: 11, 17, 18, 29, 33, 37, the distribution across the categories is quite uniform (Figure 1). Despite the presence of mis-labeled data, we are still able to get a rough sensing of what each category is about. For example, Figure 2 shows the images taken from category 5.
 
 Figure 1:
 ![Image](images/distribution_of_product_categories_in_labeled_data.png)
-Figure2:
+Figure 2:
 ![Image](images/sample_images.png)
-
 
 # 3. Data Processing
 Since the number of data points is quite substantial, we decided to split the labelled data randomly into a 90/10 train-validation split. 
@@ -35,7 +34,18 @@ We used the predicted probabilities of the validation set as inputs for the meta
 
 
 ## Base models:
-Layer 0 consists of various classifiers to diversify our ensemble. We trained the 2 deep neural networks using TPUs provided by Kaggle, which provided a significant reduction in training time, allowing us to employ more extensive data augmentations to alleviate overfitting.
+Layer 0 consists of various classifiers to diversify our ensemble. 
+We trained the 2 deep neural networks using TPUs provided by Kaggle, which provided a significant reduction in training time, allowing us to employ more extensive data augmentations to alleviate overfitting. 
+Also, after fine tuning a deep neural network, training on just the images, we obtained the confusion matrix on the training data (Figure 3). 
+The labels on the horizontal and vertical axis are our assumed category name for each of the 42 classes. We noticed that there were groups of classes that are more prone to be mislabelled with a label within the group. 
+For example, data points in classes 0, 1, and 2 are more prone to be mislabelled with labels from the other 2 classes in this group. 
+Also, despite some classes having much lesss data points to train on, many of them still had really high accuracies. 
+A more worrying discovery was that the model gave high probability for its prediction even though the image was clearly incorrectly labelled, along wih the high training accuracy of > 0.99, suggests that the model was already overfitting the images. 
+Therefore, we decided to focus more on the OCR results and other features to make our models more robust.
+
+Figure 3:
+![Image](images/confusion_matrix.png)
+
 
 1. DenseNet201 + GlobalAveragePooling2D + Softmax. Fine tuning. Data Augmentations: Random Flips + Rotation + Sheer + Shift. Input: 512*512*3 sized images only. Optimizer: Adam
 2. XceptionNet
@@ -49,7 +59,7 @@ Meta-models:
 (trained using)
 8. XGBoost with Bayesian optimisation
 9. NN
-10. Adaboost
+
 
 Weighted average of meta models using hill climbing algorithm
 
