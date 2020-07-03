@@ -48,7 +48,7 @@ Figure 3:
 
 
 1. DenseNet201 + GlobalAveragePooling2D + Softmax. Fine tuning. Data Augmentations: Random Flips + Rotation + Sheer + Shift. Input: 512*512*3 sized images only. Optimizer: Adam
-2. XceptionNet
+2. DenseNet201 + GlobalAveragePooling2D + Softmax. Fine tuning. Data Augmentations: Random Flips + GridMask. Input: 512*512*3 sized images only. Label smoothin = 0.1.
 3. KNN on TF-IDF, K = 20
 4. KNN on TF-IDF, K = 40
 5. KNN on word embedding, K = 20
@@ -67,7 +67,7 @@ Weighted average of meta models using hill climbing algorithm
 | Model Index | Validation accuracy    |
 | ----------- | ---------------------- |
 | 01          |     0.8159             |
-| 02          |       -                |
+| 02          |     0.8057             | (base model 13)
 | 03          |       -                |
 | 04          |       -                |
 | 05          |       -                |
