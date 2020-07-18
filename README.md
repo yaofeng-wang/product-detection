@@ -29,8 +29,10 @@ Figure 2:
 Since the number of data points is quite substantial, we decided to split the labelled data randomly into a 90/10 train-validation split. 
 This split allocates 94860 data points into the training set and 10539 data points into the validation set. 
 This split was used for models 01 to 08 (shown in results section).
-
 For models 09 and 10, we used 3 Fold cross validation on the entire labelled data set instead.
+
+To improve the training speed, we resized all our images to 512 x 512 x 3.
+In order to maximise the speed improvements from TPUs, we also stored the images and relevant information in TFRecords, a binary file format that is compatible  and highly recommended to use when working with TPUs.
 
 # 4. Classification model
 The final classificaiton model that we used was a simple sequential model .
@@ -66,26 +68,35 @@ Legend
 
 # 5. Post competition review
 
-The key element to achieve a high accuracy (around 0.80) for this task was to train our model with Google's Tensor Processing Units (TPUs). The reduction in training time was significant and this allowed us to try more complex pretrained models i.e. DenseNet201 and various data augmentation techniques.
+The key element to achieve a high accuracy (around 0.80) for this task was to train our model with Google's Tensor Processing Units (TPUs). The reduction in training time was significant and this allowed us to try more complex pretrained models e.g. Xception, DenseNet201 and various data augmentation techniques e.g. GridMask, Mixup.
+
 
 Using the predictions of our model, we obtained the confusion matrix on the training data (Figure 3). 
 The labels on the horizontal and vertical axis are our assumed category name for each of the 42 classes. We noticed that there were groups of classes that are more prone to be mislabelled with a label within the group. 
 For example, data points in classes 0, 1, and 2 are more prone to be mislabelled with labels from the other 2 classes in this group. 
 Also, despite some classes having much lesss data points to train on, many of them still had really high accuracies. 
-A more worrying discovery was that the model gave high probability for its prediction even though the image was clearly incorrectly labelled, along wih the high training accuracy of > 0.99, suggests that the model was already overfitting the images. 
-Therefore, we decided to focus more on the OCR results and other features to make our models more robust.
+A more worrying discovery was that the model gave high probability for its prediction even though the image was clearly incorrectly labelled, along wih the high training accuracy of > 0.99, suggesting that the model was already overfitting the images. 
 
 Figure 3:
 ![Image](images/confusion_matrix.png)
 
 ## Things that helped:
 1. TPU >> GPU >> CPU.
-2. More complex model such as DNet/XNet compared to MNetV2. Training acc was able to increase from ~0.7 to >0.99. Although, difficult to say DNet or XNet is better.
-3. FT >> TL.
-4. Data agumentation. Although, difficult to say kind of DA is better.
-5. KFold CV helps slightly.
+2. More complex model such as DenseNet/XceptionNet compared to MobileNetV2. Training acc. was able to increase from ~0.7 to >0.99.
+3. Fine Tuning >> Transfer Learning.
+4. Data agumentation such as rotation, shear, GridMask, etc.
+5. KFold CV.
 
+## Things that we tried but did not help (much):
+1. We extracted the words from each image and obtained word embeddings for each word from FastText. For each image, we took the average of the word embeddings. Then we concatenated these word emebeddings with other statics of the images (original height, original width, mean colour histogram, standard deviation of colour histogram) with the output from the GlobalAveragePooling2D layer before passing them to the last dense layer for classification.
+2. Focal loss.
+3. Label smoothing.
 
+## Things that we should have tried (learnt from other team's post competition sharings):
+1. EfficientNet.
+2. Using TF-IDF vectors instead of word embedding.
+3. Batch normalisation.
+4. Test time augmentation.
 
 # 6. Reference
 
