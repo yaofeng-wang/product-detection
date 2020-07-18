@@ -1,5 +1,5 @@
 # 0. Abstract
-In the Shopee Code League - Product Detection challenge, our team (Servants of the Joy) managed to obtain a private leaderboard score of [0.82648](https://www.kaggle.com/c/shopee-product-detection-student/leaderboard) (highest: 0.86804) and cliched the 33rd place in the student catgory (top 5%). 
+In the Shopee Code League - Product Detection challenge (Student category), our team (Servants of the Joy) managed to obtain a private leaderboard score of [0.82648](https://www.kaggle.com/c/shopee-product-detection-student/leaderboard) (highest: 0.86804) and cliched the 33rd place in the student catgory (top 5%). 
 This was accomplished without any external datasets and only using the limited computation accelerators (i.e. GPUs, TPUs) from Kaggle.
 We used Tensorflow as the deep learning framework.
 The architecture of our final model is a sequential model consisting of a pretrained DenseNet201, GlobalAveragePooling2D, and a dense layer with softmax activation. We fine tuned the pretrained DenseNet201 using 512x512x3 images, optmized using Adam, with 3 Fold cross validation.
